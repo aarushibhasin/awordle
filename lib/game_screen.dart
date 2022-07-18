@@ -107,7 +107,7 @@ class _GameScreenState extends State<GameScreen> {
             Future.delayed(const Duration(milliseconds: 1000), () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ResultScreen()),
+                MaterialPageRoute(builder: (context) => ResultScreen(attempts: activeRow,)),
               );
 
               return;

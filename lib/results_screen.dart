@@ -2,7 +2,8 @@ import 'package:awordle/home_screen.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-   ResultScreen({Key? key}) : super(key: key);
+  int attempts;
+   ResultScreen({Key? key, required this.attempts}) : super(key: key);
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
@@ -29,6 +30,8 @@ class ResultScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Center(child: Text("Congrats!! You have won the Game. You are a Wordler", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 30),  )),
+              const SizedBox(height: 10,),
+              Text("No of Attempts taken: $attempts", style: const TextStyle(color: Colors.yellowAccent, fontWeight: FontWeight.normal, fontSize: 20), ),
               const SizedBox(height: 50,),
               SizedBox(
                 width: 200.0,
@@ -40,7 +43,7 @@ class ResultScreen extends StatelessWidget {
                       Navigator.pop(context);
                     }
                   },
-                  child: const Text('Go To Home Page',),
+                  child: const Text('Go To Home Page', style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),),
                 ),),
 
             ],
