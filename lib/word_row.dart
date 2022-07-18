@@ -13,11 +13,11 @@ class WordRow extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
       children: [
-        LetterTextBox(key: UniqueKey(), letter: _getLetterFromWord(0)),
-        LetterTextBox(key: UniqueKey(), letter: _getLetterFromWord(1)),
-        LetterTextBox(key: UniqueKey(), letter: _getLetterFromWord(2)),
-        LetterTextBox(key: UniqueKey(), letter: _getLetterFromWord(3)),
-        LetterTextBox(key: UniqueKey(), letter: _getLetterFromWord(4)),
+        LetterTextBox(key: ObjectKey(_getLetterFromWord(0)), letter: _getLetterFromWord(0)),
+        LetterTextBox(key: ObjectKey(_getLetterFromWord(1)), letter: _getLetterFromWord(1)),
+        LetterTextBox(key: ObjectKey(_getLetterFromWord(2)), letter: _getLetterFromWord(2)),
+        LetterTextBox(key: ObjectKey(_getLetterFromWord(3)), letter: _getLetterFromWord(3)),
+        LetterTextBox(key: ObjectKey(_getLetterFromWord(4)), letter: _getLetterFromWord(4)),
       ],
     );
   }

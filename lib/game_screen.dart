@@ -1,6 +1,7 @@
 import 'package:awordle/dictonary.dart';
 import 'package:awordle/game_keyboard.dart';
 import 'package:awordle/results_screen.dart';
+import 'package:awordle/size_utils.dart';
 import 'package:awordle/word_row.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -54,25 +55,23 @@ class _GameScreenState extends State<GameScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const SizedBox(height: 10,),
               Container(
-                padding: EdgeInsets.all(10),
-                // color: Colors.black87,
-                height: 400,
+                padding: const EdgeInsets.all(5),
+                // color: Colors.red,
+                height: SizeUtils.h*55,
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                        // color: Colors.blueAccent,
-                        child: WordRow(
-                          key: UniqueKey(),
-                          word: attempts[0],
-                        ),
+                      WordRow(
+                        key: ObjectKey(attempts[0]),
+                        word: attempts[0],
                       ),
-                      WordRow(key: UniqueKey(), word: attempts[1]),
-                      WordRow(key: UniqueKey(), word: attempts[2]),
-                      WordRow(key: UniqueKey(), word: attempts[3]),
-                      WordRow(key: UniqueKey(), word: attempts[4]),
-                      WordRow(key: UniqueKey(), word: attempts[5]),
+                      WordRow(key: ObjectKey(attempts[1]), word: attempts[1]),
+                      WordRow(key: ObjectKey(attempts[2]), word: attempts[2]),
+                      WordRow(key: ObjectKey(attempts[3]), word: attempts[3]),
+                      WordRow(key: ObjectKey(attempts[4]), word: attempts[4]),
+                      WordRow(key: ObjectKey(attempts[5]), word: attempts[5]),
                     ]),
               ),
               GameKeyboard(
@@ -124,7 +123,7 @@ class _GameScreenState extends State<GameScreen> {
         } else {
           _showAlert("The word does not exist in the dictionary");
         }
-      } else if (alphabetPressed == "Delete") {
+      } else if (alphabetPressed == "Del") {
         attempts[activeRow].removeAlphabet();
       } else {
         attempts[activeRow].addAlphabets(alphabetPressed);

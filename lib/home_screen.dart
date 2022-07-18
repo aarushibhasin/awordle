@@ -1,5 +1,6 @@
 
 import 'package:awordle/game_screen.dart';
+import 'package:awordle/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,32 +23,23 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
-    primary: Colors.lightBlue,
+    primary: Colors.pinkAccent,
     // minimumSize: Size(300, 36),
-    padding: EdgeInsets.symmetric(horizontal: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 10),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(100  )),
     ),
   );
 
-  final TextStyle mainButtonTextStyle =  TextStyle(fontSize: 20);
+  final TextStyle mainButtonTextStyle =  const TextStyle(fontSize: 20);
 
   @override
   Widget build(BuildContext context) {
+    // Initialize the size
+    SizeUtils().init(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -85,8 +77,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 fit:BoxFit.fill  ),
             SizedBox(height: 50,),
             SizedBox(
-              width: 200.0,
-              height: 50.0,
+              width: SizeUtils.w*60,
+              height: 60.0,
               child: ElevatedButton(
                 style: raisedButtonStyle,
                 onPressed: () {
@@ -110,8 +102,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
             SizedBox(height: 30,),
             SizedBox(
-              width: 200.0,
-              height: 50.0,
+              width: SizeUtils.w*60,
+              height: 60.0,
               child:ElevatedButton(
                 style: raisedButtonStyle,
                 onPressed: () {

@@ -1,5 +1,6 @@
 import 'package:awordle/alpha_keys.dart';
 import 'package:awordle/data/word.dart';
+import 'package:awordle/size_utils.dart';
 import 'package:flutter/material.dart';
 
 class GameKeyboard extends StatelessWidget {
@@ -11,11 +12,15 @@ class GameKeyboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.black87,
-      padding: EdgeInsets.all(5),
+      // color: Colors.grey,
+      padding: const EdgeInsets.all(5),
+      height: SizeUtils.h*30  ,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [_rowOne(), _rowTwo(), _rowThree(), _rowFour()],
+        crossAxisAlignment: CrossAxisAlignment.stretch  ,
+        children: [_rowOne(), _rowTwo(), _rowThree()
+          // _rowFour()
+        ],
       ),
     );
   }
@@ -24,9 +29,9 @@ class GameKeyboard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 10; i++)
           AlphabetKeys(
-            key: UniqueKey(),
+            key: ObjectKey(keyboardKeys[i]),
             alphabet: keyboardKeys[i],
             onKeyPressed: inputFunction,
           ),
@@ -38,44 +43,60 @@ class GameKeyboard extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        for (int i = 9; i < 18; i++)
+        const SizedBox(width: 10,),
+        for (int i = 10; i < 19; i++)
           AlphabetKeys(
-            key: UniqueKey(),
+            key: ObjectKey(keyboardKeys[i]),
             alphabet: keyboardKeys[i],
             onKeyPressed: inputFunction,
           ),
+        const SizedBox(width: 10,)
       ],
     );
   }
 
+  final Letter enterKey = Letter(value: "Enter");
+  final Letter delKey = Letter(value: "Del");
   Widget _rowThree() {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      for (int i = 18; i < 26; i++)
+      AlphabetKeys(
+        key: ObjectKey(enterKey),
+        alphabet: enterKey,
+        width: 15 ,
+        onKeyPressed: inputFunction,
+      ),
+      for (int i = 19; i < 26; i++)
         AlphabetKeys(
           key: UniqueKey(),
           alphabet: keyboardKeys[i],
           onKeyPressed: inputFunction,
         ),
+      AlphabetKeys(
+        key: ObjectKey(delKey),
+        alphabet: delKey,
+        width: 15 ,
+        onKeyPressed: inputFunction,
+      ),
     ]);
   }
 
-  Widget _rowFour() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        AlphabetKeys(
-          key: UniqueKey(),
-          alphabet: Letter(value: "Enter"),
-          width: 120,
-          onKeyPressed: inputFunction,
-        ),
-        AlphabetKeys(
-          key: UniqueKey(),
-          alphabet: Letter(value: "Delete"),
-          width: 120,
-          onKeyPressed: inputFunction,
-        ),
-      ],
-    );
-  }
+  // Widget _rowFour() {
+  //   return Row(
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: [
+  //       AlphabetKeys(
+  //         key: UniqueKey(),
+  //         alphabet: Letter(value: "Enter"),
+  //         width: 40,
+  //         onKeyPressed: inputFunction,
+  //       ),
+  //       AlphabetKeys(
+  //         key: UniqueKey(),
+  //         alphabet: Letter(value: "Delete"),
+  //         width: 40 ,
+  //         onKeyPressed: inputFunction,
+  //       ),
+  //     ],
+  //   );
+  // }
 }

@@ -1,15 +1,16 @@
 import 'package:awordle/data/word.dart';
+import 'package:awordle/size_utils.dart';
 import 'package:flutter/material.dart';
 
 class AlphabetKeys extends StatelessWidget {
-  Letter alphabet;
-  double width;
-  Function? onKeyPressed;
-   AlphabetKeys({Key? key, required this.alphabet, this.width=40, this.onKeyPressed}) : super(key: key);
+  final Letter alphabet;
+  final double width;
+  final Function? onKeyPressed;
+   const AlphabetKeys({Key? key, required this.alphabet, this.width=8, this.onKeyPressed}) : super(key: key);
 
-  Color defaultColor = Colors.purpleAccent;
-  Color fullMatchColor = Colors.green;
-  Color partialMatchColor = Colors.yellow;
+  final Color defaultColor = Colors.pinkAccent;
+  final Color fullMatchColor = Colors.green;
+  final Color partialMatchColor = Colors.yellow;
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +22,17 @@ class AlphabetKeys extends StatelessWidget {
     }
 
     return SizedBox(
-      width: width,
+      width: width*SizeUtils.w,
+      height: SizeUtils.h*7,
       child: ElevatedButton(
+
         style: ElevatedButton.styleFrom(
             primary: cellColor,
-            // padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+            padding: const EdgeInsets.all(0),
 
         ),
           onPressed : () => onKeyPressed!(alphabet.value),
-        child: Text(alphabet.value, style: TextStyle(fontSize: 15),),
+        child: Center(child: Text(alphabet.value, style: const TextStyle(fontSize: 15, ), )),
 
       ),
     );

@@ -6,9 +6,9 @@ class ResultScreen extends StatelessWidget {
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
-    primary: Colors.lightBlue,
+    primary: Colors.pinkAccent,
     // minimumSize: Size(300, 36),
-    padding: EdgeInsets.symmetric(horizontal: 16),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(100  )),
     ),
@@ -19,15 +19,17 @@ class ResultScreen extends StatelessWidget {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text("Results"),
+        title: const Text("Results"),
       ),
       body: Center(
         child: Container(
+          padding: const EdgeInsets.all(20),
           color: Colors.black87,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Center(child: const Text("You have won the Game. You are a Wordler", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 40),  )),
-              SizedBox(height: 50,),
+              const Center(child: Text("Congrats!! You have won the Game. You are a Wordler", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 30),  )),
+              const SizedBox(height: 50,),
               SizedBox(
                 width: 200.0,
                 height: 50.0,
