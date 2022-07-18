@@ -101,18 +101,18 @@ class _MyHomePageState extends State<MyHomePage> {
             //   ),),
 
             SizedBox(height: 30,),
-            SizedBox(
-              width: SizeUtils.w*60,
-              height: 60.0,
-              child:ElevatedButton(
-                style: raisedButtonStyle,
-                onPressed: () {
-
-                  // SystemNavigator.pop();
-                },
-                child: Text('Exit Game', style: mainButtonTextStyle,),
-              ),),
-            SizedBox(height: 100  ,),
+            // SizedBox(
+            //   width: SizeUtils.w*60,
+            //   height: 60.0,
+            //   child:ElevatedButton(
+            //     style: raisedButtonStyle,
+            //     onPressed: () {
+            //
+            //       // SystemNavigator.pop();
+            //     },
+            //     child: Text('Exit Game', style: mainButtonTextStyle,),
+            //   ),),
+            // SizedBox(height: 100  ,),
 
           ],
         ),
