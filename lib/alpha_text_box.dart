@@ -10,6 +10,8 @@ class LetterTextBox extends StatelessWidget {
   final Color defaultColor = Colors.grey;
   final Color fullMatchColor = Colors.green;
   final Color partialMatchColor = Colors.yellow;
+  final Color noMatchColor = Colors.black45;
+
   @override
   Widget build(BuildContext context) {
 
@@ -19,6 +21,8 @@ class LetterTextBox extends StatelessWidget {
       cellColor = fullMatchColor;
     } else if(letter.type == "PARTIAL_MATCH")  {
       cellColor = partialMatchColor;
+    }else if(letter.type == "NO_MATCH") {
+      cellColor = noMatchColor;
     }
 
     return SizedBox(

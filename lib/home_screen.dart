@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 style: raisedButtonStyle,
                 onPressed: () {
 
-                  SystemNavigator.pop();
+                  // SystemNavigator.pop();
                 },
                 child: Text('Exit Game', style: mainButtonTextStyle,),
               ),),

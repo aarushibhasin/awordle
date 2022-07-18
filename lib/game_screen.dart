@@ -55,24 +55,24 @@ class _GameScreenState extends State<GameScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 padding: const EdgeInsets.all(5),
                 // color: Colors.red,
-                height: SizeUtils.h*55,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      WordRow(
-                        key: ObjectKey(attempts[0]),
-                        word: attempts[0],
-                      ),
-                      WordRow(key: ObjectKey(attempts[1]), word: attempts[1]),
-                      WordRow(key: ObjectKey(attempts[2]), word: attempts[2]),
-                      WordRow(key: ObjectKey(attempts[3]), word: attempts[3]),
-                      WordRow(key: ObjectKey(attempts[4]), word: attempts[4]),
-                      WordRow(key: ObjectKey(attempts[5]), word: attempts[5]),
-                    ]),
+                height: SizeUtils.h * 55,
+                child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                  WordRow(
+                    key: ObjectKey(attempts[0]),
+                    word: attempts[0],
+                  ),
+                  WordRow(key: ObjectKey(attempts[1]), word: attempts[1]),
+                  WordRow(key: ObjectKey(attempts[2]), word: attempts[2]),
+                  WordRow(key: ObjectKey(attempts[3]), word: attempts[3]),
+                  WordRow(key: ObjectKey(attempts[4]), word: attempts[4]),
+                  WordRow(key: ObjectKey(attempts[5]), word: attempts[5]),
+                ]),
               ),
               GameKeyboard(
                 keyboardKeys: keyboardKeys,
@@ -104,22 +104,13 @@ class _GameScreenState extends State<GameScreen> {
         if (isWordValid) {
           int matchedLetters = _matchWord(attempts[activeRow]);
           if (matchedLetters == 5) {
-            Future.delayed(const Duration(milliseconds: 1000), () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ResultScreen(attempts: activeRow,)),
-              );
-
-              return;
-            });
+            _showResultScreen(true);
+            return;
           }
 
-          print("Word accepted. moving to next line");
+          activeRow < attempts.length - 1 ? activeRow += 1 : _showResultScreen(false);
 
-          activeRow < attempts.length - 1
-              ? activeRow += 1
-              : _showAlert("Attempts over. You have lost the game");
-          print("active row is $activeRow");
+          print("Word accepted. moving to next line");
         } else {
           _showAlert("The word does not exist in the dictionary");
         }
@@ -131,26 +122,43 @@ class _GameScreenState extends State<GameScreen> {
     });
   }
 
+  void _showResultScreen(bool win) {
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ResultScreen(
+                  attempts: activeRow+1,
+                  win: win,
+                  targetWord: _targetWord,
+                )),
+      );
+    });
+  }
+
   bool _validateWordFromDictionary(String word) {
     return database.contains(word);
   }
 
-  int _matchWord(Word word) {
+  int _matchWord(Word guessWord) {
     int index = 0;
     int matchedLetters = 0;
-    for (var letter in word.letters) {
-      if (_targetWord.contains(letter.value)) {
-        letter.type = "PARTIAL_MATCH";
-        int keyboardIndex = keyboardKeys.indexOf(letter);
+    for (var guessLetter in guessWord.letters) {
+      int keyboardIndex = keyboardKeys.indexOf(guessLetter);
+      Letter matchedKeyboardLetter = keyboardKeys.elementAt(keyboardIndex);
+      if (_targetWord.contains(guessLetter.value)) {
+        guessLetter.type = "PARTIAL_MATCH";
 
-        Letter matchedKey = keyboardKeys.elementAt(keyboardIndex);
-        if (matchedKey.type != "FULL_MATCH") {
-          matchedKey.type = "PARTIAL_MATCH";
+        if (matchedKeyboardLetter.type != "FULL_MATCH") {
+          matchedKeyboardLetter.type = "PARTIAL_MATCH";
         }
+      } else {
+        guessLetter.type = "NO_MATCH";
+        matchedKeyboardLetter.type = "NO_MATCH";
       }
-      if (letter.value == _targetWord[index]) {
-        letter.type = "FULL_MATCH";
-        int keyboardIndex = keyboardKeys.indexOf(letter);
+      if (guessLetter.value == _targetWord[index]) {
+        guessLetter.type = "FULL_MATCH";
+        int keyboardIndex = keyboardKeys.indexOf(guessLetter);
         keyboardKeys.elementAt(keyboardIndex).type = "FULL_MATCH";
         matchedLetters++;
       }

@@ -11,6 +11,7 @@ class AlphabetKeys extends StatelessWidget {
   final Color defaultColor = Colors.pinkAccent;
   final Color fullMatchColor = Colors.green;
   final Color partialMatchColor = Colors.yellow;
+  final Color noMatchColor = Colors.black45;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,8 @@ class AlphabetKeys extends StatelessWidget {
       cellColor = fullMatchColor;
     } else if(alphabet.type == "PARTIAL_MATCH")  {
       cellColor = partialMatchColor;
+    }else if(alphabet.type == "NO_MATCH") {
+      cellColor = noMatchColor;
     }
 
     return SizedBox(

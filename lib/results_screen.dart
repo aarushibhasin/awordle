@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
   int attempts;
-   ResultScreen({Key? key, required this.attempts}) : super(key: key);
+  bool win;
+  String targetWord;
+   ResultScreen({Key? key, required this.attempts, required this.win, required this.targetWord}) : super(key: key);
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     onPrimary: Colors.white,
@@ -16,6 +18,14 @@ class ResultScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
+    String mainMessage = "Congrats!! You have won the Game. You are a Wordler";
+    String secMessage = "No of Attempts taken: $attempts";
+    if(!win) {
+      mainMessage = "You have lost the Game. The word was $targetWord.";
+      secMessage = "Better Luck Next time";
+
+    }
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
@@ -29,9 +39,9 @@ class ResultScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Center(child: Text("Congrats!! You have won the Game. You are a Wordler", style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 30),  )),
+               Center(child: Text(mainMessage, style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold, fontSize: 30),  )),
               const SizedBox(height: 10,),
-              Text("No of Attempts taken: $attempts", style: const TextStyle(color: Colors.yellowAccent, fontWeight: FontWeight.normal, fontSize: 20), ),
+              Text(secMessage, style: const TextStyle(color: Colors.yellowAccent, fontWeight: FontWeight.normal, fontSize: 20), ),
               const SizedBox(height: 50,),
               SizedBox(
                 width: 200.0,

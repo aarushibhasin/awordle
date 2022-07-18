@@ -33,7 +33,7 @@ class Letter {
 
 
   String value;
-  String type = "NO_MATCH";
+  String type = "NONE";
   Letter({ this.value = ""});
 
   @override
